@@ -1,2 +1,4 @@
 %h2= @ticket.title
 %p= @ticket.description
+
+= link_to "Edit Ticket", [:edit, @project, @ticket]

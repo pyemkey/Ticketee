@@ -3,7 +3,7 @@
 FactoryGirl.define do
   factory :ticket do
     title "MyString"
-    description "MyString"
+    description "MyStrinsa sdg"
     project nil
   end
 end

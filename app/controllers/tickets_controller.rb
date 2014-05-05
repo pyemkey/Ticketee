@@ -1,5 +1,5 @@
 class TicketsController < ApplicationController
-  before_action :set_project, only: [:new, :show, :create, :update, :delete, :edit]
+  before_action :set_project, only: [:new, :show, :create, :update, :destroy, :edit]
   def new
     @project = Project.find(params[:project_id])  
     @ticket = @project.tickets.build
@@ -34,6 +34,11 @@ class TicketsController < ApplicationController
     end
   end
 
+  def destroy
+    @ticket = @project.tickets.find(params[:id])
+    @ticket.destroy
+    redirect_to @project, notice: "Ticket has been deleted." 
+  end
   private
   def ticket_params
     params.require(:ticket).permit(:title, :description) 

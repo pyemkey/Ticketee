@@ -1,0 +1,9 @@
+= form_for [@project, @ticket] do |f|
+  = display_errors(@ticket)
+  = f.label :title 
+  = f.text_field :title
+
+  = f.label :description
+  = f.text_area :description
+
+  = f.submit "#{ @ticket.new_record? ? "Create Ticket" : "Update Ticket"}"

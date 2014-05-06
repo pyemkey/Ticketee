@@ -20,5 +20,4 @@ feature 'Profile page' do
 
     expect(page).to have_content("Profile has been updated.")
   end
-
 end

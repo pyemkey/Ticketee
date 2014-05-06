@@ -7,8 +7,7 @@
     = javascript_include_tag "application", "data-turbolinks-track" => true
     = csrf_meta_tags
   %body
-    %nav
-      =link_to "Sign up", new_user_path
+    = render "/layouts/navigation"
 
     = render "/layouts/messages"
     = yield

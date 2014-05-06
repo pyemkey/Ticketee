@@ -13,4 +13,5 @@
   = f.label :password_confirmation
   = f.password_field :password_confirmation
 
-  = f.submit "Sign up"
+  = f.submit "#{@user.new_record? ? "Sign up" : "Update Profile"}"
+

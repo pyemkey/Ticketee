@@ -3,6 +3,7 @@ require 'spec_helper'
 feature 'Editing Projects' do
   
   before do
+    sign_in_as!(create(:admin_user))
     create(:project, name: "TextMate2")
     visit '/'
     click_link "TextMate2"

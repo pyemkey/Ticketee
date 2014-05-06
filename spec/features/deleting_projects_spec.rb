@@ -2,6 +2,7 @@ require 'spec_helper'
 
 feature 'Deleting projects' do
   before do
+    sign_in_as!(create(:admin_user))
     create(:project, name: "TextMate 2")
 
     visit '/'

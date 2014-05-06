@@ -8,5 +8,6 @@
       \##{ticket.id} - #{link_to(ticket.title, [@project, ticket])}
 
 = link_to "New Ticket", new_project_ticket_path(@project)
-= link_to "Edit Project", edit_project_path(@project)
-= link_to "Delete Project", @project, method: :delete
+= admins_only do
+  = link_to "Edit Project", edit_project_path(@project)
+  = link_to "Delete Project", @project, method: :delete

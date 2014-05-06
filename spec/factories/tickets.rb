@@ -5,5 +5,6 @@ FactoryGirl.define do
     title "MyString"
     description "MyStrinsa sdg"
     project nil
+    user 
   end
 end

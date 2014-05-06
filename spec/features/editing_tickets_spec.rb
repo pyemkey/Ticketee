@@ -2,10 +2,14 @@ require 'spec_helper'
 
 feature "Editing tickets" do
   let!(:project) { create(:project) }
-  let!(:ticket) { create(:ticket, project: project) }
+  let(:user) { create(:user) }
+  let!(:ticket) { create(:ticket, project: project, user: user) }
 
   before do
+    sign_in_as!(user)
+
     visit '/'
+
     click_link project.name
     click_link ticket.title
     click_link "Edit Ticket"
@@ -17,7 +21,7 @@ feature "Editing tickets" do
 
     expect(page).to have_content "Ticket has been updated."
 
-    within("h2") do
+    within("#ticket h2") do
       expect(page).to have_content("Make it really shiny!")
     end
 

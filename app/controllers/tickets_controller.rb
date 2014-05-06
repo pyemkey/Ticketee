@@ -1,5 +1,7 @@
 class TicketsController < ApplicationController
   before_action :set_project, only: [:new, :show, :create, :update, :destroy, :edit]
+  before_action :require_signin!, except: [:index, :show]
+
   def new
     @project = Project.find(params[:project_id])  
     @ticket = @project.tickets.build
@@ -7,6 +9,7 @@ class TicketsController < ApplicationController
 
   def create
     @ticket = @project.tickets.build(ticket_params)
+    @ticket.user = current_user
 
     if @ticket.save
       redirect_to [@project, @ticket], notice: "Ticket has been created."
@@ -47,4 +50,5 @@ class TicketsController < ApplicationController
   def set_project
     @project = Project.find(params[:project_id])
   end
+
 end

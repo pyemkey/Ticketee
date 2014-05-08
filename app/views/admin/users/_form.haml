@@ -10,4 +10,4 @@
   = f.check_box :admin
   = f.label :admin, "Is an admin?"
 
-  = f.submit "Create User"
+  = f.submit "#{@user.new_record? ? "Create User" : "Update User"}"

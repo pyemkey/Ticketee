@@ -1,10 +1,10 @@
 require 'spec_helper'
 
 feature "Creating Tickets" do
-  before do
-    project = create(:project, name: "Internet Explorer")
-    user = create(:user)
+  let!(:project) { create(:project, name: "Internet Explorer") }
+  let(:user) { create(:user) }
 
+  before do
     visit '/'
     click_link project.name
     click_link "New Ticket"
@@ -26,7 +26,7 @@ feature "Creating Tickets" do
 
     expect(page).to have_content("Ticket has been created.")
     within "#ticket #author" do
-      expect(page).to have_content("Created by user@example.com")
+      expect(page).to have_content("Created by #{user.email}")
     end
   end
 

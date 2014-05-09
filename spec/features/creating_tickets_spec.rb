@@ -2,19 +2,16 @@ require 'spec_helper'
 
 feature "Creating Tickets" do
   let!(:project) { create(:project, name: "Internet Explorer") }
-  let(:user) { create(:user) }
+  let!(:user) { create(:user) }
 
   before do
+    define_permission!(user, "view", project)
     visit '/'
     click_link project.name
-    click_link "New Ticket"
     message = "You need to sign in or sign up before continuing."
     expect(page).to have_content(message)
 
-    fill_in "Username", with: user.name
-    fill_in "Password", with: user.password
-    click_button "Sign in"
-
+    sign_in_as!(user)
     click_link project.name
     click_link "New Ticket"
   end

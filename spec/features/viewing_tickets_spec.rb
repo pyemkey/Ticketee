@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 feature 'Viewing tickets' do
+  let!(:user) { create(:user) }
   before do
     textmate_2 = create(:project,
                         name: 'TextMate 2')
@@ -10,13 +11,15 @@ feature 'Viewing tickets' do
            title: "Make it shiny!",
            description: "Gradients! Starbursts! Oh my!")
 
+    define_permission!(user, "view", textmate_2)
     internet_explorer = create(:project,
                                name: "Internet Explorer")
     create(:ticket,
            project: internet_explorer,
            title: 'Standards compliance',
            description: "Isn't a joke.")
-
+    define_permission!(user, "view", internet_explorer)
+    sign_in_as!(user)
     visit '/'
   end
 

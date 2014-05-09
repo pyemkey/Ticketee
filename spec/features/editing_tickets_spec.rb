@@ -6,6 +6,7 @@ feature "Editing tickets" do
   let!(:ticket) { create(:ticket, project: project, user: user) }
 
   before do
+    define_permission!(user, "view", project)
     sign_in_as!(user)
 
     visit '/'

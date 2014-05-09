@@ -7,7 +7,6 @@ feature "Creating Tickets" do
   before do
     define_permission!(user, "view", project)
     visit '/'
-    click_link project.name
     message = "You need to sign in or sign up before continuing."
     expect(page).to have_content(message)
 

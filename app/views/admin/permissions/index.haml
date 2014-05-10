@@ -1,0 +1,18 @@
+%h2
+  Permissions for #{@user.email}
+= form_tag admin_user_set_permissions_path, :method => :put do
+  %table#permissions{cellspacing: "0"}
+    %thead
+      %th Project
+      - permissions.each do |name, text|
+        %th= text
+    %tbody
+      - @projects.each do |project|
+        %tr{class: cycle("odd", "even"), id: "project_#{project.id}"}
+          %td= project.name
+          - permissions.each do |name, text|
+            %td
+              = check_box_tag "permissions[#{project.id}][#{name}]", |
+                @ability.can?(name.to_sym, project),                 |
+                @ability.can?(name.to_sym, project)                  |
+  = submit_tag "Update"

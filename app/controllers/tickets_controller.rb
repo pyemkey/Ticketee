@@ -1,6 +1,8 @@
 class TicketsController < ApplicationController
-  before_action :set_project, only: [:new, :show, :create, :update, :destroy, :edit]
   before_action :require_signin!
+  before_action :set_project
+  before_action :set_ticket, only: [:show, :edit, :update, :destroy]
+  before_action :authorize_create!, only: [:new, :create]
 
   def new
     @project = Project.find(params[:project_id])  
@@ -20,15 +22,12 @@ class TicketsController < ApplicationController
   end
 
   def show
-    @ticket = @project.tickets.find(params[:id]) 
   end
 
   def edit
-    @ticket = @project.tickets.find(params[:id])
   end
 
   def update
-    @ticket = @project.tickets.find(params[:id])
     if @ticket.update(ticket_params)
       redirect_to [@project, @ticket], notice: "Ticket has been updated." 
     else
@@ -38,7 +37,6 @@ class TicketsController < ApplicationController
   end
 
   def destroy
-    @ticket = @project.tickets.find(params[:id])
     @ticket.destroy
     redirect_to @project, notice: "Ticket has been deleted." 
   end
@@ -54,4 +52,14 @@ class TicketsController < ApplicationController
     redirect_to root_path
   end
 
+  def set_ticket
+    @ticket = @project.tickets.find(params[:id]) 
+  end
+
+  def authorize_create!
+    if !current_user.admin? && cannot?("create tickets".to_sym, @project)
+      flash[:danger] = "You cannot create tickets on this project."
+      redirect_to @project 
+    end
+  end
 end

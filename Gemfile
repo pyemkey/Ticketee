@@ -29,6 +29,8 @@ gem 'jbuilder', '~> 1.2'
 
 gem 'html2haml'
 gem 'haml-rails'
+gem 'cancancan'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false

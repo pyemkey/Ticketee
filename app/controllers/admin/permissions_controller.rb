@@ -7,7 +7,6 @@ class Admin::PermissionsController < Admin::BaseController
   end
 
   def set
-    binding.pry
     @user.permissions.clear
     params[:permissions].each do |id, permissions|
       project = Project.find(id)

@@ -33,6 +33,11 @@ describe TicketsController do
       expect(response).to redirect_to(project)
       expect(flash[:danger]).to eq("You cannot edit tickets on this project.") 
     end
+    
+    def cannot_delete_tickets!
+      expect(response).to redirect_to(project)
+      expect(flash[:danger]).to eq("You cannot delete tickets on this project.") 
+    end
 
     it 'cannot begin to create ticket' do
       get :new, project_id: project.id
@@ -52,6 +57,11 @@ describe TicketsController do
     it 'cannot update a ticket without permission' do
       put :update, { project_id: project.id, id: ticket.id, ticket: {} }
       cannot_update_tickets!
+    end
+
+    it "cannot delete a ticket without permission" do
+      delete :destroy, { project_id: project.id, id: ticket.id }
+      cannot_delete_tickets! 
     end
   end
 end

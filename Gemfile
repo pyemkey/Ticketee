@@ -30,6 +30,8 @@ gem 'jbuilder', '~> 1.2'
 gem 'html2haml'
 gem 'haml-rails'
 gem 'cancancan'
+gem 'bootstrap-sass'
+gem 'carrierwave', '0.8.0'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

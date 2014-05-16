@@ -1,9 +1,23 @@
-%nav
-  %ul
-    - if current_user
-      - admins_only do
-        = link_to "Admin", admin_root_path
-      %li= link_to "Sign out", signout_path, method: :delete
-    - else
-      %li= link_to "Sign in", signin_path 
-      %li= link_to "Sign up", new_user_path
+%nav.navbar.navbar-default{role: 'navigation'}
+  .container
+    .navbar-header
+      %button.navbar-toggle{type: 'button', 'data-toggle' => 'collapse', 'data-target' => '#bs-example'}
+      = link_to 'Ticketee BETA', root_path, class: 'navbar-brand'
+    .collapse.navbar-collapse#bs-example
+      %ul.nav.navbar-nav.navbar-right
+        - if current_user
+          - admins_only do
+            %li= link_to "Admin", admin_root_path
+          %li= link_to "Sign out", signout_path, method: :delete
+        - else
+          %li= link_to "Sign in", signin_path
+          %li= link_to "Sign up", new_user_path
+          
+-#      - unless current_user
+-#        = form_for :signin, method: :post, html: { class: "form-inline" } do |f|
+-#          .navbar-collapse.collapse
+-#            .navbar-form.navbar-right
+-#              .form-group
+-#                = f.text_field :name, placeholder: "Username", class: 'form-control'
+-#                = f.password_field :password, placeholder: "Password", class: 'form-control'
+-#              = f.submit 'Sign in', class: 'btn btn-success'

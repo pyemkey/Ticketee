@@ -1,7 +1,7 @@
 %h2
   Permissions for #{@user.email}
 = form_tag admin_user_set_permissions_path, :method => :put do
-  %table#permissions{cellspacing: "0"}
+  %table.table.table-striped#permissions{cellspacing: "0"}
     %thead
       %th Project
       - permissions.each do |name, text|
